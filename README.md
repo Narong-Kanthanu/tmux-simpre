@@ -72,7 +72,7 @@ If you want to change to your workflow. you can edit `tmux-simpre/.tmux.conf` an
 
 ## Contact
 
-Narong Kanthanu - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Narong Kanthanu - narong.oken@gmail.com
 
 Project Link: [https://github.com/Narong-Kanthanu/tmux-simpre](https://github.com/Narong-Kanthanu/tmux-simpre)
 
