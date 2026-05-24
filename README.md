@@ -4,7 +4,18 @@
 
 [![tmux.conf][product-screenshot]](https://example.com)
 
-`tmux-simpre` is simple tmux config with nice status bar, minimal style, auto save session, package manager, and key binding for vim movement.
+`tmux-simpre` is a simple tmux config with a nice status bar, minimal style, auto-saved sessions, a package manager, and vim-style key bindings.
+
+### Features
+
+- Catppuccin (Macchiato) theme with a minimal status bar
+- Status bar shows CPU, disk, battery, online/Tailscale VPN status
+- Auto-save and restore sessions (`tmux-resurrect` + `tmux-continuum`)
+- Vim-style pane navigation (`h`/`j`/`k`/`l`)
+- Quick splits (`v` horizontal, `s` vertical) and friendlier window/session keys
+- Confirm-before-kill for windows and sessions
+- Universal clipboard with `allow-passthrough` enabled
+- **Lazygit + Claude Code integration**: press `prefix + g` while a [Claude Code](https://claude.com/claude-code) session is running in the current pane to open a lazygit popup in Claude Code's actual working directory (not the parent shell's), so the diff matches what Claude is editing. Works on macOS and Linux, and finds `claude` even when launched through a wrapper (e.g. `npx claude`).
 
 <!-- GETTING STARTED -->
 
@@ -34,24 +45,24 @@ This is tmux config, please install tmux before you used.
    ```js
    cd tmux-simpre
    ```
-3. Install config with bash script. `NOTE: Backup your tmux.conf first. this config will replece your config at $HOME dir `
+3. Install config with bash script. `NOTE: backup your existing ~/.tmux.conf first — install.sh will prompt you to replace it.`
 
    ```sh
    bash install.sh
    ```
 
-4. If you installed will show `Install success, please press Ctrl+r in tmux mode to reload config` in your terminal. it's done!!
+4. On success you'll see `Install success, please press Ctrl+b+r in tmux mode to reload config`. It's done!
 
-5. In your terminal create new session on tmux, [(Tmux Cheat Sheet)](https://tmuxcheatsheet.com/)
+5. In your terminal create a new tmux session ([Tmux Cheat Sheet](https://tmuxcheatsheet.com/))
 
 ```sh
 $ tmux
 ```
 
-6. Reload your tmux with binding key
+6. Reload tmux config (prefix is `Ctrl + b`)
 
 ```sh
-Control + r
+Ctrl + b  then  r
 ```
 
 7. Install tmux package
