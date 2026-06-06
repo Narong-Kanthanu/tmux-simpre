@@ -16,6 +16,7 @@
 - Confirm-before-kill for windows and sessions
 - Universal clipboard with `allow-passthrough` enabled
 - **Lazygit + Claude Code integration**: press `prefix + g` while a [Claude Code](https://claude.com/claude-code) session is running in the current pane to open a lazygit popup in the right working directory — automatically resolved in this order: (1) if the pane is attached to a specific [Agent View](https://code.claude.com/docs/en/agent-view) background session (matched via process-tree pid vs. `claude agents --json`), lazygit opens in that agent's worktree; (2) otherwise it jumps to the highest-priority running agent (`needs_input` > `working` > most-recent `idle`), so you land where the work is happening even if you're orchestrating from a foreground claude pane; (3) otherwise it falls back to the local claude process's cwd; (4) finally to the pane's own path. Works on macOS and Linux, finds `claude` even when launched through a wrapper (e.g. `npx claude`). Agent-aware steps require `jq`.
+- **Jump back to origin** (`prefix + l`): return to the exact session, window, and pane you launched from. Reads a pane id stored in the `@origin` session option (set by an external launcher, e.g. a Neovim "open in AI workspace" mapping) and restores it in one hop; falls back to tmux's last-session when `@origin` is unset.
 
 <!-- GETTING STARTED -->
 
