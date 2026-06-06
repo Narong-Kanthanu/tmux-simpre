@@ -45,6 +45,20 @@ The script is `/bin/sh` (not bash) and must stay POSIX — `set` builtins, `[ ..
 - Test all four resolution steps manually before committing. A change that "works for me" usually means only step 3 or step 4 was exercised.
 - macOS uses `lsof`, Linux uses `/proc`. There is no third branch; if you add one (BSD, WSL with quirks, etc.), preserve the existing `case "$(uname -s)"`.
 
+## The `prefix + l` back-to-origin binding and the `@origin` contract
+
+`bind-key 'l'` in `.tmux.conf` reads the `@origin` session option and jumps back to where you came from, falling back to `switch-client -l` (tmux's last-session) when it's unset.
+
+**`@origin` is set by an external launcher, not by this repo.** The contract is: `@origin` holds a tmux **pane id** (e.g. `%5`), not a session name. Because a pane id uniquely identifies its session, window, and pane, the binding restores all three in one hop:
+
+```
+switch-client -t "$o" ; select-window -t "$o" ; select-pane -t "$o"
+```
+
+The producer today is the companion Neovim config (`lazyvim-nodejs-setup`, `lua/plugins/ai/codecompanion.lua`): when it opens a window in the shared "AI workspace" tmux session, it tags that session with `@origin = $TMUX_PANE` of the pane it was launched from. If you change the value format on either side, change **both** — they are a cross-repo pair.
+
+Backward/forward safety: the `select-window`/`select-pane` calls are suffixed with `2>/dev/null`, so a stale session-name value (the old format) degrades gracefully instead of surfacing a popup error. Keep that.
+
 ## Style conventions in this repo
 
 - Catppuccin Macchiato palette via `#{@thm_*}` variables — reuse these instead of hardcoding hex colors when adding status-bar segments.
